@@ -1,0 +1,16 @@
+/*
+ * Tip calculator for the WAP Browser demo deck (index.wml#tip).
+ * Reads $(bill) and $(pct), writes $(tip) and $(total), then shows the result.
+ */
+extern function calc() {
+    var bill = Lang.parseInt(WMLBrowser.getVar("bill"));
+    var pct = Lang.parseInt(WMLBrowser.getVar("pct"));
+    if (!isvalid bill || bill < 0) {
+        Dialogs.alert("Please enter the bill amount.");
+        return;
+    }
+    var tip = bill * pct / 100;
+    WMLBrowser.setVar("tip", String.format("%.2f", tip));
+    WMLBrowser.setVar("total", String.format("%.2f", bill + tip));
+    WMLBrowser.go("index.wml#tipped");
+}
